@@ -10,6 +10,8 @@ from botocore.config import Config
 from botocore.exceptions import (
     ClientError,
     EndpointConnectionError,
+    NoCredentialsError,
+    PartialCredentialsError,
     ReadTimeoutError,
 )
 from botocore.exceptions import (
@@ -52,6 +54,8 @@ def _classify_exception(exc: BaseException) -> ExtractionError:
         return ExtractionError("invalid_output", "json_error", str(exc))
     if isinstance(exc, (ReadTimeoutError, TimeoutError)):
         return ExtractionError("budget_exceeded", "timeout", str(exc))
+    if isinstance(exc, (NoCredentialsError, PartialCredentialsError)):
+        return ExtractionError("operational_error", "auth", str(exc))
     if isinstance(exc, (BotoConnectionError, EndpointConnectionError)):
         return ExtractionError("operational_error", "network", str(exc))
     if isinstance(exc, ClientError):
