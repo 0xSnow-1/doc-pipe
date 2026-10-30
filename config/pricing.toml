@@ -1,0 +1,10 @@
+version = "2026-10-30"
+source = "https://aws.amazon.com/bedrock/pricing/"
+
+[models."global.anthropic.claude-haiku-4-5-20251001-v1:0"]
+input_per_million_usd = 1.00
+output_per_million_usd = 5.00
+
+[models."us.anthropic.claude-haiku-4-5-20251001-v1:0"]
+input_per_million_usd = 1.10
+output_per_million_usd = 5.50
